@@ -1,0 +1,75 @@
+---
+- name: Setup Kafka Producer and Consumer
+  hosts: aws_ec2
+  become: yes
+
+  vars:
+    repo_url: "https://github.com/aadithya-naresh/Real-time-streaming-project.git"
+    project_dir: "/opt/real-time"
+    repo_branch: "aadi-reddit"
+    kafka_docker_compose: "docker-compose.yml"
+    kafka_producer_script: "API/reddit_producer.py"
+    kafka_consumer_script: "Spark/spark_consumer.py"
+    venv_path: "/.venv"
+    spark_version: "3.1.2"
+    hadoop_version: "2.7"
+    spark_home: "/opt/spark"
+    producer_log: "/var/log/kafka_producer.log"
+    consumer_log: "/var/log/kafka_consumer.log"
+  tasks:
+    - name: Install necessary packages
+      yum:
+        name:
+          - git
+          - docker
+          - python3
+          - java-1.8.0-openjdk
+          - curl
+        state: present
+
+    - name: Install docker-compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+
+    - name: Ensure docker-compose is executable
+      file:
+        path: /usr/local/bin/docker-compose
+        mode: '0755'
+        state: file
+
+    - name: Ensure Docker service is started
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add ec2-user to docker group
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes
+
+    - name: Restart Docker service to apply group changes
+      service:
+        name: docker
+        state: restarted
+
+    - name: Clone the GitHub repository
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ project_dir }}"
+        version: "{{ repo_branch }}"
+        update: yes
+
+    - name: Run Docker Compose up and capture live output
+      command: /usr/local/bin/docker-compose up -d
+      args:
+        chdir: "{{ project_dir }}/Kafka"
+      async: 3600
+      poll: 5
+      register: compose_output
+
+
+
