@@ -2,9 +2,9 @@ resource "aws_db_instance" "default" {
   allocated_storage    = 20
   storage_type         = "gp2"
   engine               = "mysql"
-  engine_version       = "8.0.25"
+  engine_version       = "8.0.36"
   instance_class       = "db.t3.micro"
-  name                 = "mydatabase"
+  db_name              = "mydatabase"
   username             = "admin"
   password             = var.rds_password
   parameter_group_name = "default.mysql8.0"
@@ -33,20 +33,4 @@ resource "aws_security_group" "rds_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-output "rds_endpoint" {
-  value = aws_db_instance.default.endpoint
-}
-
-output "rds_port" {
-  value = aws_db_instance.default.port
-}
-
-output "rds_username" {
-  value = aws_db_instance.default.username
-}
-
-output "rds_db_name" {
-  value = aws_db_instance.default.name
 }

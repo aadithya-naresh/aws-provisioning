@@ -16,6 +16,7 @@
     spark_home: "/opt/spark"
     producer_log: "/var/log/kafka_producer.log"
     consumer_log: "/var/log/kafka_consumer.log"
+
   tasks:
     - name: Install necessary packages
       yum:
@@ -71,5 +72,37 @@
       poll: 5
       register: compose_output
 
+    - name: Ensure RDS_ENDPOINT is set in bashrc
+      lineinfile:
+        path: ~/.bashrc
+        line: 'export RDS_ENDPOINT={{ hostvars[inventory_hostname].rds_endpoint }}'
+        insertafter: 'EOF'
+        state: present
+
+    - name: Ensure RDS_DB_NAME is set in bashrc
+      lineinfile:
+        path: ~/.bashrc
+        line: 'export RDS_DB_NAME={{ hostvars[inventory_hostname].rds_db_name }}'
+        insertafter: 'EOF'
+        state: present
+
+    - name: Ensure RDS_USERNAME is set in bashrc
+      lineinfile:
+        path: ~/.bashrc
+        line: 'export RDS_USERNAME={{ hostvars[inventory_hostname].rds_username }}'
+        insertafter: 'EOF'
+        state: present
+
+    - name: Ensure RDS_PASSWORD is set in bashrc
+      lineinfile:
+        path: ~/.bashrc
+        line: 'export RDS_PASSWORD={{ hostvars[inventory_hostname].rds_password }}'
+        insertafter: 'EOF'
+        state: present
+
+    - name: Source bashrc to apply changes
+      shell: source ~/.bashrc
+      args:
+        executable: /bin/bash
 
 
