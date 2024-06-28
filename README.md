@@ -19,28 +19,15 @@ This repository contains Terraform code for provisioning AWS instances to deploy
   ```
   
 ## Usage ##
-
-1. Run ```aws configure``` with these values.
+1. Create a `terraform.tfvars` file. (see Pre-requisites).
+   
+1. Run ```./run.sh```. Authenticate with AWS with the following 
 
    ```
    aws_access_key_id = <MY_ACCESS_KEY_ID>
    aws_secret_access_key = <MY_SECRET_ACCESS_KEY>
    aws_session_token = <MY_SESSION_TOKEN>
    ```
-
-1. Create a `terraform.tfvars` file. (see Pre-requisites).
-1. Run the command `terraform init`.
-1. Plan the provisioning and check the changes:
-
-   ```console
-   terraform plan
-   ```
-1. Provision the instances if the changes are correct:
-
-   ```console
-   terraform apply
-   ```
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
