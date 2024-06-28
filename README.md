@@ -26,7 +26,6 @@ This repository contains Terraform code for provisioning AWS instances to deploy
    ```
    aws_access_key_id = <MY_ACCESS_KEY_ID>
    aws_secret_access_key = <MY_SECRET_ACCESS_KEY>
-   aws_session_token = <MY_SESSION_TOKEN>
    ```
 <!-- BEGIN_TF_DOCS -->
 ## Requirements ##
