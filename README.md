@@ -1,7 +1,5 @@
 # aws-provisioning #
 
-[![GitHub Build Status](https://github.com/cisagov/provision-aws-account/workflows/build/badge.svg)](https://github.com/cisagov/provision-aws-account/actions)
-
 This repository contains Terraform code for provisioning AWS instances to deploy Real time data into RDS. Provisioning instances for [this](https://github.com/aadithya-naresh/Real-time-streaming-project) project.
 
 ## Pre-requisites ##
