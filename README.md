@@ -4,7 +4,7 @@ This repository contains Terraform code for provisioning AWS instances to deploy
 
 ![Github](https://img.shields.io/badge/logo-javascript-blue?logo=javascript) <br>
 
-[![GitHub issues](https://img.shields.io/github/issues/aadithya-naresh/aws-provisioning)](https://github.com/aadithya-naresh/aws-provisioning/issues)
+[![GitHub issues](https://img.shields.io/github/issues/aadithya-naresh/aws-provisioning)](https://github.com/aadithya-naresh/aws-provisioning/issues) 
 
 <a href="https://github.com/aadithya-naresh/aws-provisioning/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/aadithya-naresh/aws-provisioning"></a>
 <a href="https://github.com/aadithya-naresh/aws-provisioning/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/aadithya-naresh/aws-provisioning"></a>
